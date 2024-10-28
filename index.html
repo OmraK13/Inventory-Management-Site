@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <title>Dynamo</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <div class="overlay">
+        <video autoplay loop muted class="background-video">
+            <source src="../images/overlay.mp4" type="video/mp4">
+        </video> 
+    </div>
+    <a href="index.html" class="home-button">
+        <img src="../images/home_ico.png" alt="Home Icon" class="home-icon">
+    </a>    
+    <div class="error-message" id="error-message" style="display: none;">
+        <img src="../images/eror_ico.png" alt="אייקון שגיאה">
+        <span id="error-text">יש למלא שם משתמש וסיסמה</span>
+        <span id="click-counter" class="click-counter" style="display: none;"></span>
+    </div>
+    <div class="error-message error-large" id="invalid-credentials-message" style="display: none;">
+        <img src="../images/eror_ico.png" alt="אייקון שגיאה">
+        שם המשתמש או הסיסמה שהוזנו שגויים
+        <span id="click-counter-invalid" class="click-counter" style="display: none;"></span>
+    </div>
+    <div id="loader" style="display: none;">
+    </div>
+    <div class="login-container">
+        <img src="../images/dynamo_logo.png" alt="Dynamo Logo" class="logo"> 
+        <form id="loginForm" novalidate>
+            <div class="input-container">
+                <div class="input-icon">
+                    <span class="label-text">שם משתמש</span>
+                    <img src="../images/men_ico.png" alt="אייקון איש" class="icon">
+                    <input type="text" id="username" name="username" placeholder=" " required autocomplete="off">
+                </div>
+            </div>
+            <div class="input-container">
+                <div class="input-icon">
+                    <span class="label-text">סיסמה</span>
+                    <img src="../images/lock_ico.png" alt="אייקון מנעול" class="icon">
+                    <input type="password" id="password" name="password" placeholder=" " required autocomplete="off">
+                </div>
+            </div>
+            <button type="submit">כניסה למערכת</button>
+            <a href="../html/reset_password.html" class="reset-password">שכחתי סיסמה</a>
+        </form>
+    </div>
+    
+    <script src="../js/login.js"></script>
+</body>
+</html>

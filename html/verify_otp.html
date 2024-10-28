@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <title>אימות קוד</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <div class="otp-container">
+        <h2>הזן את קוד האימות שקיבלת</h2>
+        <form id="verifyOtpForm" action="../php/verify_otp.php" method="POST">
+            <label for="otp_code">קוד האימות:</label>
+            <input type="text" id="otp_code" name="otp_code" required>
+            <button type="submit">אימות קוד</button>
+        </form>
+        <div id="error-message" class="error-message" style="display: none;">
+            <span id="error-text">קוד שגוי, אנא נסה שוב</span>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,458 @@
+body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden; /* מונע גלילה */
+    font-family: Arial, sans-serif;
+    background-color: #000;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.background-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+
+.login-container {
+    position: relative;
+    max-width: 400px;
+    margin: auto;
+    text-align: center;
+    color: #fff;
+    top: 50%; /* מוריד את כל האלמנטים למטה */
+    transform: translateY(-50%);
+}
+
+.logo {
+    width: 380px; /* גודל הלוגו */
+    margin-bottom: 10px; /* מרווח קטן יותר מתחת ללוגו */
+}
+
+.input-container {
+    margin-bottom: 25px; /* צמצום המרווח בין תיבות הטקסט */
+}
+
+.input-icon {
+    position: relative;
+}
+
+.label-text {
+    position: absolute;
+    top: 15px; /* מיקום הטקסט בתוך תיבת הקלט */
+    right: 50px; /* ממקם את הטקסט ליד האייקון */
+    color: #b9b9bb; /* צבע הטקסט */
+    font-size: 16px; /* גודל הטקסט */
+    font-family: 'Heebo', bold; /* סוג הפונט */
+    transition: all 0.3s ease; /* מעבר חלק */
+}
+
+.icon {
+    position: absolute;
+    top: 50%;
+    right: 15px; /* מיקום האייקון מצד ימין */
+    transform: translateY(-50%); /* מרכז את האייקון אנכית */
+    width: 20px; /* גודל האייקון */
+    height: 20px; /* גובה האייקון */
+}
+
+input[type="text"], input[type="password"] {
+    width: 400px;
+    height: 60px;
+    padding: 15px;
+    padding-right: 45px; /* רווח נוסף לאייקון מצד ימין */
+    padding-left: 50px; /* רווח נוסף כדי לאפשר מקום לאייקון מצד שמאל */
+    background: rgba(27, 27, 27, 0.5);
+    color: #b9b9bb;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    font-family: 'Heebo', bold;
+    border-radius: 8px;
+    text-align: left; /* יישור טקסט לשמאל */
+    box-sizing: border-box;
+    transition: background 0.3s ease; /* מעבר חלק בעת שינוי צבע */
+}
+
+/* הוספת חוקים כדי למנוע מהתיבה להפוך ללבן */
+input[type="text"]:focus,
+input[type="password"]:focus {
+    background: rgba(27, 27, 27, 0.5); /* שמירה על צבע קבוע בעת פוקוס */
+}
+
+/* שינוי מצב התווית בעת פוקוס */
+input[type="text"]:focus + .label-text,
+input[type="password"]:focus + .label-text {
+    top: -10px; /* מיקום הטקסט מעל תיבת הקלט */
+    font-size: 12px; /* גודל טקסט קטן יותר */
+    color: var(--clr-neon, #14f7ff); /* שינוי צבע הטקסט בעת פוקוס */
+}
+
+input::placeholder {
+    color: #ddd;
+    text-align: right;
+}
+
+input[type="text"]:hover,
+input[type="password"]:hover {
+    background: rgba(27, 27, 27, 0.7); /* צבע בהיר יותר בעת מעבר עם העכבר */
+    border-bottom: 1.5px solid var(--clr-neon, #ffffff); /* קו דק מעל התיבה */
+}
+
+button {
+    width: 250px;
+    padding: 15px;
+    background-color: transparent;
+    color: var(--clr-neon, #14f7ff);
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 30px;
+    cursor: pointer;
+    border: var(--clr-neon, #14f7ff) 0.125em solid;
+    text-shadow: 
+        0 0 .20em #FFF7,
+        0 0 .30em var(--clr-neon, #14f7ff);
+    box-shadow: 
+        inset 0 0 .5em var(--clr-neon, #14f7ff),
+        0 0 .5em var(--clr-neon, #14f7ff);
+    transition: background-color 0.3s, opacity 100ms linear;
+    margin-top: 15px;
+    margin-bottom: 0px;
+    position: relative;
+}
+
+button::before {
+    content: "";
+    position: absolute;
+    top: 140%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: 
+        perspective(0.2em)
+        rotateX(10deg) 
+        scale(1.3, 0.40);
+    filter: blur(0.5em);
+    opacity: 0.6;
+    pointer-events: none;
+    transition: opacity 100ms linear;
+    border-radius: 30px; /* רדיוס תואם לכפתור */
+}
+
+button::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--clr-neon, #14f7ff);
+    box-shadow: 0 0 2em var(--clr-neon, #14f7ff);
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 100ms linear;
+    border-radius: 30px; /* רדיוס תואם לכפתור */
+}
+
+button:hover::after {
+    opacity: 1;
+}
+
+button:hover, button:focus {
+    color: white;
+}
+
+button:hover::before {
+    opacity: 0.8;
+    border-radius: 30px; /* רדיוס תואם לכפתור */
+}
+
+.reset-password {
+    display: block; /* הכפתור יתפוס מקום של בלוק */
+    margin-top: 30px; /* מרווח בין הכניסה למערכת ל'שחזור סיסמה' */
+    color: #fff;
+    text-decoration: none;
+    font-family: 'Heebo', bold;
+    text-align: center; /* ממרכז את התוכן בתוך הכפתור */
+    transition: all 0.3s ease; /* מעבר חלק לעיצוב */
+    width: fit-content; /* הכפתור יתאים את הרוחב שלו לתוכן */
+    margin-left: auto; /* ממרכז את הכפתור באופן אופקי */
+    margin-right: auto; /* ממרכז את הכפתור באופן אופקי */
+}
+
+.reset-password:hover {
+    background-color: #1e1d1d33; /* רקע חצי שקוף */
+    padding: 10px 20px; /* ריווח בתוך הכפתור */
+    border-radius: 20px; /* פינות עגולות */
+    box-shadow: 0 0 10px #141414; /* הצללה */
+    text-decoration: none; /* מניעת קו תחתון */
+    color: #fff; /* שמירה על צבע טקסט */
+    width: auto; /* רוחב אוטומטי לפי התוכן */
+    max-width: 100px; /* הגבלת רוחב מקסימלי */
+}
+
+
+.error-message {
+    background-color: #bf0116e6; /* צבע רקע אדום עם שקיפות */
+    color: white; /* צבע טקסט לבן */
+    padding: 5px 10px; /* ריפוד פנימי */
+    border-radius: 10px; /* רדיוס פינות */
+    position: fixed; /* קובע את המיקום לתחתית המסך */
+    bottom: 20px; /* מיקום ההודעה בתחתית */
+    left: 50%; /* מיקום במרכז המסך */
+    transform: translateX(-50%); /* מתקן את המיקום כדי למרכז */
+    z-index: 10; /* מוודא שההודעה מעל שאר האלמנטים */
+    text-align: right; /* יישור הטקסט לשמאל */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); /* הוספת צל להודעה */
+    font-family: 'Heebo', bold; /* סוג הפונט */
+    font-size: 16px; /* גודל הפונט */
+    display: flex; /* שימוש ב-flexbox */
+    align-items: center; /* ממרכז את התוכן אנכית */
+    justify-content: flex-start; /* מעביר את התוכן לצד שמאל */
+    width: 90%; /* גודל רוחב ההודעה */
+    max-width: 250px; /* מגביל את רוחב ההודעה */
+    direction: rtl; /* מוודא כיווניות מימין לשמאל */
+}
+
+/* שינוי מיקום האייקון */
+.error-message img {
+    margin-right: 15px; /* מרווח בין האייקון לטקסט */
+    width: 30px; /* גודל האייקון */
+    height: 30px; /* גובה האייקון */
+    vertical-align: middle; /* ממרכז את האייקון אנכית */
+}
+
+.timer-bar {
+    position: absolute;
+    bottom: 0; /* ממקם את הפס בתחתית */
+    right: 0; /* מתחיל בצד ימין */
+    width: 100%; /* מתחיל במצב מלא */
+    height: 2px; /* גובה הפס */
+    background-color: #d44d5c; /* צבע הפס */
+    animation: shrink 4s linear forwards; /* האנימציה של התקצרות לאורך 5 שניות */
+}
+
+/* האנימציה שמקטינה את רוחב הפס */
+@keyframes shrink {
+    from {
+        width: 100%;
+    }
+    to {
+        width: 0%;
+    }
+}
+
+.click-counter {
+    background-color: #bf0116e6;
+    color: white;
+    border-radius: 10px; /* פינות מעוגלות */
+    font-family: 'Heebo', bold; /* סוג הפונט */
+    padding: 5px 10px;
+    font-size: 14px;
+    margin-left: 10px; /* מרווח קטן בין הספירה להודעה */
+    position: absolute;
+    top: -10px;
+    right: -10px;
+}
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+
+.click-counter.shake {
+    animation: shake 0.5s; /* זמן הרעידה */
+}
+.error-large {
+    max-width: 350px; /* מרחיב את תיבת השגיאה השנייה */
+    width: 90%;
+}
+.phone-icon {
+    width: 30px; /* גודל האייקון שאתה רוצה */
+    height: 30px; /* גובה האייקון שאתה רוצה */
+    right: 10px;
+}
+
+/* עיצוב כפתור הבית בסגנון ניאון */
+.home-button {
+    position: fixed; /* הכפתור יישאר קבוע בצד שמאל למעלה */
+    top: 10px; /* ריווח מלמעלה */
+    right: 10px; 
+    z-index: 1000; /* יבטיח שהכפתור יישאר מעל כל התוכן */
+    display: inline-block;
+    padding: 15px;
+    background-color: transparent;
+    border-radius: 30px;
+    cursor: pointer;
+    border: var(--clr-neon, #14f7ff) 0.125em solid;
+    box-shadow: 
+        inset 0 0 .5em var(--clr-neon, #14f7ff),
+        0 0 .5em var(--clr-neon, #14f7ff);
+    transition: background-color 0.3s, opacity 100ms linear;
+}
+
+.home-button:hover::after {
+    opacity: 1;
+}
+
+.home-button::before {
+    content: "";
+    position: absolute;
+    top: 140%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: 
+        perspective(0.2em)
+        rotateX(10deg) 
+        scale(1.3, 0.40);
+    filter: blur(0.5em);
+    opacity: 0.6;
+    pointer-events: none;
+    transition: opacity 100ms linear;
+    border-radius: 30px;
+}
+
+.home-button::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--clr-neon, #14f7ff);
+    box-shadow: 0 0 2em var(--clr-neon, #14f7ff);
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 100ms linear;
+    border-radius: 30px;
+}
+
+.home-button:hover {
+    color: white;
+}
+
+.home-button:hover::before {
+    opacity: 0.8;
+}
+
+.home-icon {
+    width: 30px; /* גודל האייקון */
+    height: 30px;
+    display: block;
+    transition: transform 0.3s ease, filter 0.3s ease; /* אנימציה לסיבוב ואפקט צבע */
+}
+
+.home-button:hover .home-icon {
+    transform: rotate(360deg); /* סיבוב האייקון במעבר עכבר */
+    filter: brightness(0) invert(1); /* משנה את צבע האייקון ללבן */
+}
+.dashboard-container {
+    text-align: center;
+    color: #fff;
+    position: relative;
+    z-index: 1;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    top: 0px; /* הזזת הקונטיינר למעלה ב-50 פיקסלים */
+    left: 0;
+}
+
+.grid-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.button-image {
+    width: 500px;
+    height: 300px;
+    margin-bottom: 20px;
+    opacity: 0.9; /* שקיפות קלה */
+    border-radius: 15px; /* מסגרת עגולה */
+    box-shadow: 0 0 10px #14f7ff, 0 0 10px #14f7ff, 0 0 30px #14f7ff; /* צל בצבע תכלת */
+    transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; /* מעבר חלק */
+}
+
+.button-image:hover {
+    opacity: 1; /* חזרה לשקיפות מלאה בעת מעבר עכבר */
+    transform: scale(1.05); /* אפקט של הגדלה קטנה */
+    box-shadow: 0 0 5px #14f7ff, 0 0 30px #14f7ff, 0 0 30px #14f7ff; /* צל זוהר יותר */
+}
+
+
+button {
+    padding: 15px;
+    background-color: transparent;
+    color: var(--clr-neon, #14f7ff);
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 30px;
+    cursor: pointer;
+    border: var(--clr-neon, #14f7ff) 0.125em solid;
+    text-shadow: 
+        0 0 .20em #FFF7,
+        0 0 .30em var(--clr-neon, #14f7ff);
+    box-shadow: 
+        inset 0 0 .5em var(--clr-neon, #14f7ff),
+        0 0 .5em var(--clr-neon, #14f7ff);
+    transition: background-color 0.3s, opacity 100ms linear;
+    width: 200px;
+}
+
+.logo-container {
+    position: fixed; /* מוודא שהלוגו לא משפיע על האלמנטים האחרים */
+    top: 380px; /* מרווח מהחלק העליון של המסך */
+    left: 50%; /* מיקום במרכז האופקי של המסך */
+    transform: translateX(-50%); /* ממרכז את הלוגו בדיוק */
+    z-index: 10; /* מבטיח שהלוגו יהיה מעל שאר התוכן */
+}
+
+.center-logo {
+    width: 400px; /* גודל הלוגו */
+    height: auto;
+    opacity: 0.9;
+    transition: opacity 0.3s ease;
+}
+
+.center-logo:hover {
+    opacity: 1; /* אפקט שקיפות בעת מעבר עכבר */
+}
+.background-image {
+    background-image: url('../images/Web_build.png');
+    background-size: cover; /* תגרום לתמונה למלא את כל המסך */
+    background-position: center; /* תמרכז את התמונה */
+    height: 100vh; /* גובה המסך */
+    width: 100vw; /* רוחב המסך */
+}
+
+
+
+
+
+
+
+
