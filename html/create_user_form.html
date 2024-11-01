@@ -1,22 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="he">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create User</title>
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/create_user_form.css">
     <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
 </head>
 <body>
-    <h1>Create a New User</h1>
-    <form action="../php/create_user.php" method="post">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required><br><br>
-        
-        <label for="password">Temporary Password:</label>
-        <input type="password" id="password" name="password" required><br><br>
-        
-        <input type="submit" value="Create User">
-    </form>
+    <div class="overlay">
+        <video autoplay loop muted class="background-video">
+            <source src="../images/overlay.mp4" type="video/mp4">
+        </video> 
+    </div>
+    <a href="dashboard.html" class="home-button">
+        <img src="../images/home_ico.png" alt="Home Icon" class="home-icon">
+    </a>
+    
+    <!-- הודעות שגיאה והצלחה -->
+    <div class="error-message" id="error-message" style="display: none;">
+        <img src="../images/eror_ico.png" alt="אייקון שגיאה">
+        <span id="error-text">יש להזין שם משתמש וסיסמה</span>
+        <div class="timer-bar"></div>
+    </div>
+    
+    <div class="success-message" id="success-message" style="display: none;">
+        <img src="../images/success_ico.png" alt="אייקון הצלחה">
+        <span id="success-text">המשתמש נוצר בהצלחה!</span>
+        <div class="timer-bar"></div>
+    </div>
+
+    <div class="login-container">
+        <img src="../images/dynamo_logo.png" alt="Dynamo Logo" class="logo"> 
+        <form id="createUserForm" novalidate>
+            <div class="input-container">
+                <div class="input-icon">
+                    <span class="label-text">שם משתמש</span>
+                    <img src="../images/men_ico.png" alt="אייקון איש" class="icon">
+                    <input type="text" id="username" name="username" placeholder=" " required autocomplete="off">
+                </div>
+            </div>
+            <div class="input-container">
+                <div class="input-icon">
+                    <span class="label-text">הקלד סיסמה זמנית</span>
+                    <img src="../images/lock_ico.png" alt="אייקון מנעול" class="icon">
+                    <input type="password" id="password" name="password" placeholder=" " required autocomplete="off">
+                </div>
+            </div>
+            <button type="submit">צור משתמש</button>
+        </form>
+    </div>
+    
+    <script src="../js/create_user_form.js"></script>
 </body>
 </html>

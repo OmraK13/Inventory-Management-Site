@@ -1,112 +1,33 @@
-/* הגדרות רשת */
+
 .grid-container-small {
     display: flex;
-    flex-direction: column; /* כל השורות יהיו בעמודה אחת */
-    justify-content: center; /* מרכז את השורות */
-    align-items: center; /* מרכז את הכפתורים */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     position: relative;
     width: 100%;
 }
 
-/* הגדרת מיקום מדויק לכל שורה */
 .row {
-    display: grid; /* שימוש ברשת עבור כל שורה */
-    grid-template-columns: repeat(4, 1fr); /* 4 כפתורים בכל שורה */
-    gap: 100px; /* רווח בין הכפתורים */
-    margin: 150px; /* מרחק אנכי בין השורות */
-    position: relative; /* מאפשר שימוש במאפיינים כמו top */
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 100px;
+    margin: 150px;
+    position: relative;
     top: -100px;
 }
 
-/* עיצוב התמונות */
-.small-image {
-    width: auto; /* גובה התמונה */
-    height: 200px; /* שמירה על יחס גובה-רוחב */
-    margin-bottom: 0; /* אין רווח בין התמונה לכפתור */
-    box-shadow: none; /* ביטול אפקטי ה-neon על התמונות */
-}
-
-/* הגדרת פרטי הכפתור והתמונה */
-.grid-item-small {
-    display: flex;
-    flex-direction: column; /* יישור התמונה מעל הכפתור */
-    align-items: center; /* ממרכז את התמונה והכפתור */
-    text-align: center; /* טקסט ממורכז */
-}
-
-/* כפתור קטן עם אפקטי neon */
 .small-button {
-    width: 250px; /* גודל הכפתור */
+    width: 250px;
     padding: 15px;
-    background-color: transparent; /* שקוף בהתחלה */
+    background-color: transparent;
     color: var(--clr-neon, #14f7ff);
     font-size: 18px;
     font-weight: bold;
     border-radius: 30px;
     cursor: pointer;
     border: var(--clr-neon, #14f7ff) 0.125em solid;
-    text-shadow: 
-        0 0 .20em #FFF7,
-        0 0 .30em var(--clr-neon, #14f7ff);
-    box-shadow: 
-        inset 0 0 .5em var(--clr-neon, #14f7ff),
-        0 0 .5em var(--clr-neon, #14f7ff);
     transition: background-color 0.3s, opacity 100ms linear;
-    margin-top: 15px; /* רווח בין התמונה לכפתור */
-    margin-bottom: 0px;
-    position: relative;
-    min-height: 60px; /* גובה מינימלי לכפתור כדי להבטיח שהוא לא יזוז */
-}
-
-/* לפני ואחרי הכפתור */
-.small-button::before {
-    content: "";
-    position: absolute;
-    top: 140%;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    transform: 
-        perspective(0.2em)
-        rotateX(10deg) 
-        scale(1.3, 0.40);
-    filter: blur(0.5em);
-    opacity: 0.6;
-    pointer-events: none;
-    transition: opacity 100ms linear;
-    border-radius: 30px; /* רדיוס תואם לכפתור */
-}
-
-.small-button::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: var(--clr-neon, #14f7ff);
-    box-shadow: 0 0 2em var(--clr-neon, #14f7ff);
-    z-index: -1;
-    opacity: 0;
-    transition: opacity 100ms linear;
-    border-radius: 30px; /* רדיוס תואם לכפתור */
-}
-
-/* אפקט hover לכפתור - שינוי לצבע לבן וניאון */
-.small-button:hover {
-    background-color: var(--clr-neon, #14f7ff); /* הכפתור מתמלא בתכלת */
-    color: white; /* שינוי צבע הטקסט ללבן */
-}
-
-.small-button:hover::after {
-    opacity: 1;
-}
-
-.small-button:hover, .small-button:focus {
-    color: white; /* שינוי צבע הטקסט ללבן */
-}
-
-.small-button:hover::before {
-    opacity: 0.8;
-    border-radius: 30px; /* רדיוס תואם לכפתור */
+    margin-top: 15px;
+    min-height: 60px;
 }

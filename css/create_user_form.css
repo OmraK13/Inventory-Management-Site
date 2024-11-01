@@ -1,0 +1,97 @@
+
+.login-container {
+    position: relative;
+    max-width: 400px;
+    margin: auto;
+    text-align: center;
+    color: #fff;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.success-message {
+    background-color: #3CB371; /* צבע ירוק */
+    color: white;
+    padding: 5px 10px;
+    border-radius: 10px;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    text-align: right;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    font-family: 'Heebo', bold;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 90%;
+    max-width: 250px;
+    direction: rtl;
+}
+
+.success-message img {
+    margin-right: 15px;
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
+}
+
+.timer-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: #2e8b57;
+    animation: shrink 4s linear forwards; /* 5 שניות */
+}
+
+@keyframes shrink {
+    from { width: 100%; }
+    to { width: 0%; }
+}
+.error-message {
+    background-color: #bf0116e6; /* צבע אדום */
+    color: white;
+    padding: 5px 10px;
+    border-radius: 10px;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    text-align: right;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    font-family: 'Heebo', bold;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 90%;
+    max-width: 250px;
+    direction: rtl;
+}
+
+.error-message img {
+    margin-right: 15px;
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
+}
+
+.timer-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: #d44d5c; /* צבע קו אדום כהה */
+    animation: shrink 4s linear forwards; /* 5 שניות */
+}
+
+@keyframes shrink {
+    from { width: 100%; }
+    to { width: 0%; }
+}
+

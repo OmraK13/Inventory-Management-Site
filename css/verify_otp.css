@@ -1,0 +1,15 @@
+
+.timer-bar {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #d44d5c;
+    animation: shrink 4s linear forwards;
+}
+
+@keyframes shrink {
+    from { width: 100%; }
+    to { width: 0%; }
+}
