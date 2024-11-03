@@ -18,7 +18,6 @@ document.getElementById('resetPasswordForm').addEventListener('submit', async fu
         errorText.textContent = 'חובה להזין מספר טלפון';
         errorMessage.style.display = 'flex';
 
-        // הצגת מונה רק לאחר ניסיון שני
         if (emptyPhoneClickCount > 1) {
             counter.style.display = 'inline';
             counter.textContent = emptyPhoneClickCount;
@@ -46,23 +45,22 @@ document.getElementById('resetPasswordForm').addEventListener('submit', async fu
         return; // מניעת שליחת הטופס
     }
 
-    // שליחת ה-OTP לשרת לשליחת SMS
-    const response = await fetch('php/reset_password.php', {
+    // שליחת בקשת OTP לשרת
+    const response = await fetch(`${window.location.origin}/api/resetPassword`, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
+            'Content-Type': 'application/json'
         },
-        body: `phone_number=${encodeURIComponent(phoneNumber)}`
+        body: JSON.stringify({ phone_number: phoneNumber })
     });
+    
 
-    const result = await response.text();
+    const result = await response.json();
 
-    // במידה וה-OTP נשלח בהצלחה
-    if (result.includes('OTP נשלח')) {
+    if (result.status === 'success') {
         // מעביר את המשתמש לדף הזנת הקוד
         window.location.href = 'html/verify_otp.html';
     } else {
-        // הודעת שגיאה נוספת אם יש בעיה בשליחה
         errorText.textContent = 'אירעה שגיאה בשליחת ה-OTP. נסה שוב.';
         errorMessage.style.display = 'flex';
     }

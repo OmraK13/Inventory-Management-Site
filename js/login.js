@@ -21,11 +21,10 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
 
     // כאשר אין שם משתמש או סיסמה
     if (!username || !password) {
-        emptyFieldClickCount++; // העלאה של מונה לחיצות כשאין פרטים
+        emptyFieldClickCount++;
         errorText.textContent = 'יש למלא שם משתמש וסיסמה';
         errorMessage.style.display = 'flex';
 
-        // הצגת מונה רק לאחר ניסיון שני
         if (emptyFieldClickCount > 1) {
             counter.style.display = 'inline';
             counter.textContent = emptyFieldClickCount;
@@ -40,45 +39,42 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
         errorMessage.appendChild(timerBar);
 
         if (timeout) {
-            clearTimeout(timeout); // ביטול טיימר קודם אם קיים
+            clearTimeout(timeout);
         }
 
         timeout = setTimeout(() => {
             errorMessage.style.display = 'none';
             errorMessage.removeChild(timerBar);
-            emptyFieldClickCount = 0; // איפוס המונה לאחר 4 שניות
+            emptyFieldClickCount = 0;
             counter.style.display = 'none';
         }, 4000);
 
-        return; // מניעת שליחת הטופס
+        return;
     }
 
-    loader.style.display = 'block'; // הצגת טעינה
+    loader.style.display = 'block';
 
-    // הגשת הנתונים ל-login.php
-    const response = await fetch('php/login.php', {
+    // שליחת בקשת התחברות ל-API של Node.js
+    const response = await fetch(`${window.location.origin}/api/login`, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
+            'Content-Type': 'application/json'
         },
-        body: `username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`
-    });
+        body: JSON.stringify({ username, password })
+    });    
 
     const result = await response.json();
 
-    loader.style.display = 'none'; // הסתרת טעינה
-
+    loader.style.display = 'none';
+    
     // אם ההתחברות מוצלחת
     if (result.status === 'success') {
-        window.location.href = 'html/dashboard.html'; // הפניה לדף הבית
-    } 
-    // אם שם המשתמש או הסיסמה לא נכונים
-    else {
-        invalidLoginClickCount++; // העלאת מונה לניסיונות שגויים
-        errorText.textContent = 'שם המשתמש או הסיסמה שהוזנו שגויים';
+        window.location.href = 'html/dashboard.html';
+    } else {
+        invalidLoginClickCount++;
+        errorText.textContent = result.message;
         invalidCredentialsMessage.style.display = 'flex';
 
-        // הצגת מונה הניסיונות השגויים
         if (invalidLoginClickCount > 1) {
             invalidCounter.style.display = 'inline';
             invalidCounter.textContent = invalidLoginClickCount;
@@ -93,13 +89,13 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
         invalidCredentialsMessage.appendChild(timerBar);
 
         if (invalidTimeout) {
-            clearTimeout(invalidTimeout); // ביטול טיימר קודם אם קיים
+            clearTimeout(invalidTimeout);
         }
 
         invalidTimeout = setTimeout(() => {
             invalidCredentialsMessage.style.display = 'none';
             invalidCredentialsMessage.removeChild(timerBar);
-            invalidLoginClickCount = 0; // איפוס המונה לאחר 4 שניות
+            invalidLoginClickCount = 0;
             invalidCounter.style.display = 'none';
         }, 4000);
     }
